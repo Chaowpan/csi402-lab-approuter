@@ -7,12 +7,11 @@ import dayjs from "dayjs";
 export default function Register() {
   const router = useRouter();
 
-  // State สำหรับเก็บข้อมูลที่ผู้ใช้กรอก
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [userId, setUserId] = useState("");
 
-  // ฟังก์ชันการลงทะเบียน
+
   const handleRegister = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -21,16 +20,15 @@ export default function Register() {
       return;
     }
 
-    // บันทึกข้อมูลการลงทะเบียน
+
     const expiry = dayjs().add(30, "minute").toISOString();
     localStorage.setItem("temporary_access", expiry);
 
-    // บันทึกข้อมูลผู้ใช้งาน
+
     localStorage.setItem("user", JSON.stringify({ firstName, lastName, userId }));
 
     alert("ลงทะเบียนสำเร็จ! คุณสามารถใช้สิทธิ์การใช้งานชั่วคราวได้ 30 นาที");
 
-    // เปลี่ยนเส้นทางไปหน้า Home
     router.push("/");
   };
 
